@@ -52,10 +52,16 @@ pub use crate::params::{
 pub fn parse_ss58_address_format(x: &str) -> Result<Ss58AddressFormat, String> {
 	match Ss58AddressFormatRegistry::try_from(x) {
 		Ok(format_registry) => Ok(format_registry.into()),
-		Err(_) => Err(format!(
-			"Unable to parse variant. Known variants: {:?}",
-			Ss58AddressFormat::all_names()
-		)),
+		Err(_) => {
+			if let Ok(numeric_format) = x.parse::<u16>() {
+				Ok(Ss58AddressFormat::custom(numeric_format))
+			} else {
+				Err(format!(
+					"Unable to parse variant. Known variants: {:?}",
+					Ss58AddressFormat::all_names()
+				))
+			}
+		}
 	}
 }
 
