@@ -19,3 +19,4 @@
 //! Integration tests for subkey commands.
 
 mod sig_verify;
+mod parse_ss58_address_format;

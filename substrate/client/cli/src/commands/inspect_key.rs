@@ -260,4 +260,12 @@ mod tests {
 			false,
 		);
 	}
+
+	#[test]
+	fn inspect_public_key_custom_ss58_u16_format() {
+		let secret_seed = "0xeca7f30fed0c034c509534fbeccd32a56a87f7cebf8d058c141255aade93c50a";
+		let public_key = "0x94f0e60040dd066c90910b704c3088321a78a91e1f5fc4d4240481a06ac4435b";
+		let inspect_cmd = InspectKeyCmd::parse_from(&["inspect", secret_seed, "--network", "355", "--expect-public", public_key]);
+		assert!(inspect_cmd.run().is_ok(), "Inspect command failed!");
+	}
 }

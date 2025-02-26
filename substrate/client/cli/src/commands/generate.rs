@@ -83,4 +83,16 @@ mod tests {
 		let generate = GenerateCmd::parse_from(&["generate", "--password", "12345"]);
 		assert!(generate.run().is_ok())
 	}
+
+	#[test]
+	fn generate_ss58_from_registry() {
+		let generate = GenerateCmd::parse_from(&["generate", "--network", "polkadot"]);
+		assert!(generate.run().is_ok())
+	}
+
+	#[test]
+	fn generate_ss58_custom_format() {
+		let generate = GenerateCmd::parse_from(&["generate", "--network", "355"]);
+		assert!(generate.run().is_ok())
+	}
 }
